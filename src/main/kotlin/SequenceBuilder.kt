@@ -16,16 +16,15 @@ class SequenceBuilder (private val spectrum: List<String>, private val groupLeng
         while (groups.isNotEmpty()) { subsequences.add(findSubsequence()) }
     }
 
-    fun joinSubsequences (until: Int = 1) { // groupLength/2
+    fun joinSubsequences (until: Int = 1) {
 
         for(offset in groupLength - 1 downTo until) {
             if(subsequences.size == 1)
                 break
-            for(j in 0..subsequences.lastIndex) {
-                //val match = subsequences.filter { subsequence != it && it.substring(0, it.length - offset) == subsequence.substring(offset)}
-                if(j > subsequences.lastIndex)
+            for(key in 0..subsequences.lastIndex) {
+                if(key > subsequences.lastIndex)
                     break
-                glueSubsequences(offset, j)
+                glueSubsequences(offset, key)
             }
         }
     }
