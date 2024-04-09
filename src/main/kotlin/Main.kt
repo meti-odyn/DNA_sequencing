@@ -10,9 +10,9 @@ fun createList (seq: String, subSeqLength: Int = 10): MutableList<String> {
 fun trial () {
     val origin = "ACGTCTTGACGCCAACTGCC"
     val spectrum = createList(origin)
-    val dnaFinder = SequenceBuilder(spectrum)
-    dnaFinder.naiveHeuristic()
-    val sequence = dnaFinder.getSubsequences()[0]
+    val dnaFinder = SequenceBuilder(spectrum, Int.MAX_VALUE)
+
+    val sequence = dnaFinder.naiveHeuristicWithCutting()
 
     println(spectrum)
     println("sequence $sequence")
@@ -28,15 +28,22 @@ fun showSubsequences (subsequences: List<String>) {
 }
 
 fun main() { //args: Array<String>
-    val instancesPath = "C:/Users/48519/Documents/Studia/semestr 6/BioInformatyka/DNA_sequencing/src/instances/"
-    val files = listOf ("9.200-40.txt", "53.500-200.txt")
-    val file = File(instancesPath + files[1])
-    val dnaFinder = SequenceBuilder( file.useLines { it.toList() } )
-//    dnaFinder.showGroups()
-//    println()
 
-    //dnaFinder.naiveHeuristic()
-    dnaFinder.findSubsequences()
-    dnaFinder.joinSubsequences(5)
-    showSubsequences(dnaFinder.getSubsequences())
+    val instancesPath = "C:/Users/48519/Documents/Studia/semestr 6/BioInformatyka/DNA_sequencing/src/instances/"
+    val fileIndex = 0
+    val files = listOf ("9.200-40.txt", "53.500-200.txt", "34.500-32.txt", "113.500-8.txt", "10.500+200.txt", "25.500+50.txt")
+    val n = listOf(209, 509, 509, 509, 509, 509)
+
+    for (i in n.indices) {
+        val file = File(instancesPath + files[i])
+        val dnaFinder = SequenceBuilder( file.useLines { it.toList() }, n[i])
+        var dnaResault = dnaFinder.naiveHeuristic()
+        println("naive")
+        println("dna: $dnaResault\nlength: ${dnaResault.length}")
+
+        dnaResault = dnaFinder.naiveHeuristicWithCutting()
+        println("naive with cutting")
+        println("dna: $dnaResault\nlength: ${dnaResault.length}")
+        println()
+    }
 }

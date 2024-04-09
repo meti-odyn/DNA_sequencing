@@ -1,45 +1,54 @@
-class SequenceBuilder (private val spectrum: List<String>, private val groupLength: Int = 10) {
+class SequenceBuilder (private val spectrum: List<String>, private val maxSequenceSize: Int ,private val groupLength: Int = 10) {
 
     private val groups: MutableMap<String,Pair<MutableList<String>,MutableList<String>>> = mutableMapOf()
-    private val subsequences = mutableListOf<String>()
+    private var subsequences = mutableListOf<String>()
 
-    init {
+    fun naiveHeuristicWithCutting (): String {
         fillGroups()
+        findSubsequences ()
+        joinSubsequences (withCutting = true)
+        subsequences.sortByDescending { it.length }
+        return if(subsequences[0].length > maxSequenceSize) subsequences[0].substring(0, maxSequenceSize) else subsequences[0]
     }
 
-    fun naiveHeuristic () {
+    fun naiveHeuristic (): String {
+        fillGroups()
         findSubsequences ()
         joinSubsequences ()
+        subsequences.sortByDescending { it.length }
+        return  subsequences[0]
     }
 
     fun findSubsequences () {
         while (groups.isNotEmpty()) { subsequences.add(findSubsequence()) }
     }
 
-    fun joinSubsequences (until: Int = 1) {
+    fun joinSubsequences (until: Int = 1, withCutting: Boolean = false) {
 
         for(offset in groupLength - 1 downTo until) {
             if(subsequences.size == 1)
                 break
+            subsequences.sortBy { - it.length }
             for(key in 0..subsequences.lastIndex) {
                 if(key > subsequences.lastIndex)
                     break
-                glueSubsequences(offset, key)
+                glueSubsequences(offset, key, withCutting)
             }
         }
     }
 
-    fun getSubsequences () = subsequences.toList().sortedBy { - it.length }
+    fun getSubsequences () = subsequences.sortedBy { - it.length }
 
     fun showGroups () = println(groups)
 
-    private fun glueSubsequences (offset : Int, key : Int) {
+    private fun glueSubsequences (offset : Int, key : Int, withCutting: Boolean ) {
         var otherKey = 0
         var currentKey = key
         while (otherKey < subsequences.size && subsequences.size > 1) {
             if (subsequences[currentKey] != subsequences[otherKey] &&
                 subsequences[currentKey].substring(subsequences[currentKey].length - offset) ==
-                subsequences[otherKey].substring(0, offset))
+                subsequences[otherKey].substring(0, offset) && (withCutting ||
+                        maxSequenceSize > subsequences[currentKey].length - offset + subsequences[otherKey].length))
             {
                 subsequences[currentKey] += subsequences[otherKey].substring(offset)
                 subsequences.removeAt(otherKey)
@@ -77,6 +86,11 @@ class SequenceBuilder (private val spectrum: List<String>, private val groupLeng
 
         while(core.isNotEmpty() and !groups.containsKey(core.getOrNull(0))) //!groups.containsKey(core.first) throws exception why???
             core.removeAt(0)
+//        for(key in core) {
+//            if(!groups.containsKey(key)) {
+//                core.remove(key)
+//            }
+//        }
         return if (core.isEmpty()) "" else core.first.substring(core.first.length - chars,core.first.length) +
                 getSuffix( groups.remove(core.first)!!.second)
     }
