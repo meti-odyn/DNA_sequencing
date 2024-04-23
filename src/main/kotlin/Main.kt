@@ -1,4 +1,5 @@
 import java.io.File
+import kotlin.time.measureTime
 
 fun createList (seq: String, subSeqLength: Int = 10): MutableList<String> {
     val set: MutableSet<String> = mutableSetOf()
@@ -27,23 +28,42 @@ fun showSubsequences (subsequences: List<String>) {
     println("subsequences count: ${subsequences.size}")
 }
 
+fun buildSequencesforAllFiles(path: String) {
+
+    val dir = File(path)
+
+    if (dir.isDirectory) {
+
+        dir.listFiles()?.forEach { directory ->
+            if(directory.isDirectory()) {
+                println("${directory.name}:")
+                directory.listFiles()?.forEach{ file ->
+                    if (file.isFile()) {
+                        val regex = Regex("""(?<=\.)\d+""")
+                        val match = regex.find(file.name)
+
+                        if (match != null) {
+                            val number = match.groupValues[0].toInt() + 9
+                            var dnaResault: String
+                            val duration = measureTime {
+                                val dnaFinder = SequenceBuilder( file.useLines { it.toList() }, number)
+                                dnaResault = dnaFinder.naiveHeuristicWithCutting()
+                            }
+
+                            println("n: $number \t length: ${dnaResault.length} \t time: $duration \t\t dna: $dnaResault")
+                        }
+                    }
+                }
+                println()
+            }
+            else println("Wrong Path")
+        }
+    }
+    else println("Wrong Path")
+}
+
 fun main() { //args: Array<String>
 
     val instancesPath = "C:/Users/48519/Documents/Studia/semestr 6/BioInformatyka/DNA_sequencing/src/instances/"
-    val fileIndex = 0
-    val files = listOf ("9.200-40.txt", "53.500-200.txt", "34.500-32.txt", "113.500-8.txt", "10.500+200.txt", "25.500+50.txt")
-    val n = listOf(209, 509, 509, 509, 509, 509)
-
-    for (i in n.indices) {
-        val file = File(instancesPath + files[i])
-        val dnaFinder = SequenceBuilder( file.useLines { it.toList() }, n[i])
-        var dnaResault = dnaFinder.naiveHeuristic()
-        println("naive")
-        println("dna: $dnaResault\nlength: ${dnaResault.length}")
-
-        dnaResault = dnaFinder.naiveHeuristicWithCutting()
-        println("naive with cutting")
-        println("dna: $dnaResault\nlength: ${dnaResault.length}")
-        println()
-    }
+    buildSequencesforAllFiles(instancesPath)
 }

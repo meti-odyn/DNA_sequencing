@@ -70,7 +70,7 @@ class SequenceBuilder (private val spectrum: List<String>, private val maxSequen
     private fun fillGroups (offset: Int = 1, subspectrum: List<String> = spectrum) {
         subspectrum.forEach {
             groups[it] = Pair(
-                (spectrum.filter { subseq -> it.substring(0, subseq.length - offset) == subseq.substring(offset) }).toMutableList(),
+                (spectrum.filter { subseq: String -> it.substring(0, subseq.length - offset) == subseq.substring(offset) }).toMutableList(),
                 (spectrum.filter { subseq -> subseq.substring(0, subseq.length - offset) == it.substring(offset) }).toMutableList()) }
     }
 
@@ -78,8 +78,13 @@ class SequenceBuilder (private val spectrum: List<String>, private val maxSequen
 
         while(core.isNotEmpty() and !groups.containsKey(core.getOrNull(0))) //!groups.containsKey(core.first) throws exception why???
             core.removeAt(0)
-        return if (core.isEmpty()) "" else getPrefix( groups.remove(core.first)!!.first) +
-                core.first.subSequence(0,chars)
+        return if (core.isEmpty()) "" else {
+//            while(core.size > 1 && groups[core.first]!!.first.isEmpty()) {
+//                core.removeAt(0)
+//            }
+            getPrefix( groups.remove(core.first)!!.first) +
+                    core.first.subSequence(0,chars)
+        }
     }
 
     private fun getSuffix (core: MutableList<String>, chars: Int = 1): String {
