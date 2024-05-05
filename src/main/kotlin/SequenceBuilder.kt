@@ -1,6 +1,6 @@
 class SequenceBuilder (private val spectrum: List<String>, private val maxSequenceSize: Int ,private val groupLength: Int = 10) {
 
-    private val groups: MutableMap<String,Pair<MutableList<String>,MutableList<String>>> = mutableMapOf()
+    private val groups: MutableMap<String,Triple<MutableList<String>,MutableList<String>, MutableList<MutableList<String>>>> = mutableMapOf()
     private var subsequences = mutableListOf<String>()
 
     fun naiveHeuristicWithCutting (): String {
@@ -69,35 +69,50 @@ class SequenceBuilder (private val spectrum: List<String>, private val maxSequen
 
     private fun fillGroups (offset: Int = 1, subspectrum: List<String> = spectrum) {
         subspectrum.forEach {
-            groups[it] = Pair(
+            groups[it] = Triple(
                 (spectrum.filter { subseq: String -> it.substring(0, subseq.length - offset) == subseq.substring(offset) }).toMutableList(),
-                (spectrum.filter { subseq -> subseq.substring(0, subseq.length - offset) == it.substring(offset) }).toMutableList()) }
+                (spectrum.filter { subseq -> subseq.substring(0, subseq.length - offset) == it.substring(offset) }).toMutableList(),
+                mutableListOf()
+            ) }
+
+        groups.forEach {k, v ->
+            v.first.forEach { groups[it]?.third?.add(v.first) }
+            v.second.forEach{ groups[it]?.third?.add(v.second) }
+        }
     }
 
     private fun getPrefix (core: MutableList<String>, chars: Int = 1): String {
 
-        while(core.isNotEmpty() and !groups.containsKey(core.getOrNull(0))) //!groups.containsKey(core.first) throws exception why???
-            core.removeAt(0)
-        return if (core.isEmpty()) "" else {
-//            while(core.size > 1 && groups[core.first]!!.first.isEmpty()) {
-//                core.removeAt(0)
-//            }
-            getPrefix( groups.remove(core.first)!!.first) +
-                    core.first.subSequence(0,chars)
+        core.removeAll { !groups.containsKey(it) }
+
+        return if (core.isEmpty()) {
+            ""
+        } else {
+            var index = 0
+            while(core.lastIndex > index && groups[core[index]]!!.first.isEmpty()) {
+                index++
+            }
+            val key = core[index]
+            getPrefix( removeFromGroups(key)!!.first) + key.subSequence(0,chars)
         }
     }
 
     private fun getSuffix (core: MutableList<String>, chars: Int = 1): String {
 
-        while(core.isNotEmpty() and !groups.containsKey(core.getOrNull(0))) //!groups.containsKey(core.first) throws exception why???
-            core.removeAt(0)
-//        for(key in core) {
-//            if(!groups.containsKey(key)) {
-//                core.remove(key)
-//            }
-//        }
-        return if (core.isEmpty()) "" else core.first.substring(core.first.length - chars,core.first.length) +
-                getSuffix( groups.remove(core.first)!!.second)
+        core.removeAll { !groups.containsKey(it) }
+
+        return if (core.isEmpty()) "" else {
+            var index = 0
+            while(core.lastIndex > index && groups[core[index]]!!.second.isEmpty()) {
+                index++
+            }
+            val key = core[index]
+            key.substring(key.length - chars, key.length) + getSuffix( removeFromGroups(key)!!.second)
+        }
     }
 
+    private fun removeFromGroups(key: String) : Triple<MutableList<String>,MutableList<String>, MutableList<MutableList<String>>>? {
+        groups[key]?.third?.forEach { it.remove(key) }
+        return groups.remove(key)
+    }
 }
