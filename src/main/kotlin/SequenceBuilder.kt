@@ -60,6 +60,24 @@ class SequenceBuilder (private val spectrum: List<String>, private val maxSequen
         }
     }
 
+    private fun glueSubsequencesUsingIterator (offset : Int, key : Int, withCutting: Boolean ) {
+        val iterator = subsequences.listIterator(key) // od zera powinno sie zaczac 0
+
+        while (iterator.hasNext()) { // (iterator.hasNext() && subsequences.size > 1)
+            val otherIndex = iterator.nextIndex()
+            val currentSuffix = subsequences[key].substring(subsequences[key].length - offset)
+            val otherPrefix = subsequences[otherIndex].substring(0, offset)
+
+            if (subsequences[key] != subsequences[otherIndex] &&
+                currentSuffix == otherPrefix &&
+                (withCutting || maxSequenceSize > currentSuffix.length + otherPrefix.length)) {
+                subsequences[key] += subsequences[otherIndex].substring(offset)
+                iterator.remove() // Remove the glued subsequence
+                key.dec() // Decrement current index
+            }
+        }
+    }
+
     private fun findSubsequence (offset: Int = 1): String {
 
         val key = groups.keys.first()
@@ -75,9 +93,9 @@ class SequenceBuilder (private val spectrum: List<String>, private val maxSequen
                 mutableListOf()
             ) }
 
-        groups.forEach {k, v ->
-            v.first.forEach { groups[it]?.third?.add(v.first) }
-            v.second.forEach{ groups[it]?.third?.add(v.second) }
+        groups.values.forEach { value ->
+            value.first.forEach { groups[it]?.third?.add(value.first) }
+            value.second.forEach { groups[it]?.third?.add(value.second) }
         }
     }
 
