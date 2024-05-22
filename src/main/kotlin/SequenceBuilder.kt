@@ -23,7 +23,7 @@ class SequenceBuilder (private val spectrum: List<String>, private val maxSequen
         while (groups.isNotEmpty()) { subsequences.add(findSubsequence()) }
     }
 
-    fun joinSubsequences (until: Int = 1, withCutting: Boolean = false) {
+    fun joinSubsequences (until: Int = 0, withCutting: Boolean = false) {
 
         for(offset in groupLength - 1 downTo until) {
             if(subsequences.size == 1)

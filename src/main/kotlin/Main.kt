@@ -28,10 +28,10 @@ fun showSubsequences (subsequences: List<String>) {
     println("subsequences count: ${subsequences.size}")
 }
 
-fun getQuality (spectrum: List<String>, dna: String): Double {
+fun getQuality (spectrum: List<String>, dna: String, n: Int): Double {
     var quality = 0.0
     spectrum.forEach { if (dna.contains(it)) quality += 1.0 }
-    return quality / spectrum.size
+    return quality / (n - 9)
 }
 
 fun buildSequencesforAllFiles(path: String) {
@@ -39,7 +39,6 @@ fun buildSequencesforAllFiles(path: String) {
     val dir = File(path)
 
     if (dir.isDirectory) {
-
         dir.listFiles()?.forEach { directory ->
             if(directory.isDirectory()) {
                 println("${directory.name}:")
@@ -56,8 +55,7 @@ fun buildSequencesforAllFiles(path: String) {
                                 val dnaFinder = SequenceBuilder(spectrum, number)
                                 dnaResault = dnaFinder.naiveHeuristicWithCutting()
                             }
-
-                            println("n: $number \t length: ${dnaResault.length} \t quality: ${getQuality(spectrum, dnaResault)}" +
+                            println("n: $number \t length: ${dnaResault.length} \t quality: ${getQuality(spectrum, dnaResault, number)}" +
                                     " \t time: $duration \t\t dna: $dnaResault")
                         }
                     }
