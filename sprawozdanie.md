@@ -11,6 +11,9 @@ Celem niniejszego sprawozdania jest przedstawienie wyników testów algorytmu he
 ## Algorytm
 Algorytm napisany w języku Kotlin ma na celu rozwiązanie problemu sekwencjonowania łańcuchów DNA z błędami negatywnymi i pozytywnymi. Algorytm wykorzystuje heurystyczne podejście do rekonstrukcji oryginalnej sekwencji DNA na podstawie podanych podsekwencji. Główne elementy algorytmu obejmują tworzenie listy podsekwencji, heurystyczne poszukiwanie sekwencji oraz przetwarzanie plików zawierających instancje problemu.
 
+Zmiany w oryginalnym algrytmie:
+ - gdy jest już sekwencja o długości większej lub równej n to przestajemy dalej łączyć sekwencje i za ostateczny wynik przyjmujemy pierwsze n aminokwasów tej sekwencji 
+
 ## Dane testowe
 Zbiory testowe różniły się liczbą podzbiorów. Testy przeprowadzono na instancjach z różnymi rodzajami błędów:
 - **Błędy negatywne losowe**: losowe braki w danych.
