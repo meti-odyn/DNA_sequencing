@@ -26,11 +26,11 @@ class SequenceBuilder (private val spectrum: List<String>, private val maxSequen
     fun joinSubsequences (until: Int = 0, withCutting: Boolean = false) {
 
         for(offset in groupLength - 1 downTo until) {
-            if(subsequences.size == 1)
+            if(subsequences.size == 1 || subsequences.any { it.length >= maxSequenceSize })
                 break
             subsequences.sortBy { - it.length }
             for(key in 0..subsequences.lastIndex) {
-                if(key > subsequences.lastIndex)
+                if(key > subsequences.lastIndex || subsequences.any { it.length >= maxSequenceSize })
                     break
                 glueSubsequences(offset, key, withCutting)
             }
