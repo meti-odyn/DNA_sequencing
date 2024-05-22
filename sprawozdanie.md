@@ -1,5 +1,9 @@
 # Sprawozdanie z działania algorytmu heurystycznego dla problemu sekwencjonowania łańcuchów DNA z błędami negatywnymi i pozytywnymi
 
+## Autorzy
+Stanisław Puzio <WPISAĆ INDEKS>
+Jakub Wolniak 151797
+
 ## Wprowadzenie
 Celem niniejszego sprawozdania jest przedstawienie wyników testów algorytmu heurystycznego, który został zaprojektowany do sekwencjonowania łańcuchów DNA z błędami negatywnymi i pozytywnymi. Algorytm został przetestowany na różnych instancjach problemu, a wyniki obejmują czas obliczeń oraz jakość wygenerowanego rozwiązania dla każdej instancji. Dodatkowo, dokonano porównania działania heurystyki na zbiorach testowych różniących się rodzajem zawartych błędów.
 
