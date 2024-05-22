@@ -2,6 +2,7 @@
 
 ## Autorzy
 Stanisław Puzio <WPISAĆ INDEKS>
+
 Jakub Wolniak 151797
 
 ## Wprowadzenie
