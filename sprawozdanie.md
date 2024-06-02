@@ -1,7 +1,7 @@
 # Sprawozdanie z działania algorytmu heurystycznego dla problemu sekwencjonowania łańcuchów DNA z błędami negatywnymi i pozytywnymi
 
 ## Autorzy
-Stanisław Puzio <WPISAĆ INDEKS>
+Stanisław Puzio 151886
 
 Jakub Wolniak 151797
 
