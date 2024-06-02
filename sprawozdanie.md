@@ -11,7 +11,7 @@ Celem niniejszego sprawozdania jest przedstawienie wyników testów algorytmu he
 ## Algorytm
 Algorytm napisany w języku Kotlin ma na celu rozwiązanie problemu sekwencjonowania łańcuchów DNA z błędami negatywnymi i pozytywnymi. Algorytm wykorzystuje heurystyczne podejście do rekonstrukcji oryginalnej sekwencji DNA na podstawie podanych podsekwencji. Główne elementy algorytmu obejmują tworzenie listy podsekwencji, heurystyczne poszukiwanie sekwencji oraz przetwarzanie plików zawierających instancje problemu.
 
-Zmiany w oryginalnym algrytmie:
+Zmiany w oryginalnym algorytmie:
  - gdy jest już sekwencja o długości większej lub równej n to przestajemy dalej łączyć sekwencje i za ostateczny wynik przyjmujemy pierwsze n aminokwasów tej sekwencji 
 
 ## Dane testowe
@@ -29,101 +29,93 @@ Zbiory testowe różniły się liczbą podzbiorów. Testy przeprowadzono na inst
 
 | n   | length | time (ms)    | jakość (%) |
 |-----|--------|--------------|------------|
-| 509 | 366    | 71.356       | 71.90      |
-| 509 | 451    | 21.281       | 88.61      |
-| 209 | 209    | 4.363        | 100.00     |
-| 209 | 137    | 4.250        | 65.55      |
-| 309 | 305    | 6.771        | 98.71      |
-| 309 | 178    | 9.089        | 57.61      |
-| 209 | 209    | 5.548        | 100.00     |
-| 209 | 209    | 5.835        | 100.00     |
-| 509 | 309    | 39.659       | 60.71      |
-| 509 | 509    | 23.517       | 100.00     |
-| 309 | 182    | 10.367       | 58.90      |
-| 309 | 308    | 15.471       | 99.68      |
-| 409 | 385    | 16.475       | 94.14      |
-| 409 | 409    | 22.116       | 100.00     |
-| 309 | 205    | 8.172        | 66.34      |
-| 309 | 308    | 13.267       | 99.68      |
-| 409 | 409    | 14.492       | 100.00     |
-| 409 | 333    | 28.354       | 81.42      |
-| 409 | 409    | 13.142       | 100.00     |
-| 409 | 409    | 20.159       | 100.00     |
-| 209 | 209    | 6.332        | 100.00     |
-| 209 | 189    | 3.653        | 90.43      |
+| 509 | 509    | 78.001       | 72.40      |
+| 509 | 509    | 22.582       | 53.60      |
+| 209 | 209    | 6.591        | 71.00      |
+| 209 | 209    | 4.287        | 49.50      |
+| 309 | 309    | 8.261        | 52.67      |
+| 309 | 309    | 14.323       | 73.33      |
+| 209 | 209    | 12.785       | 73.00      |
+| 209 | 209    | 6.006        | 56.00      |
+| 509 | 509    | 33.333       | 73.60      |
+| 509 | 509    | 25.812       | 55.20      |
+| 309 | 309    | 11.102       | 51.00      |
+| 309 | 309    | 16.552       | 74.00      |
+| 409 | 409    | 17.044       | 56.50      |
+| 409 | 409    | 27.943       | 73.75      |
+| 309 | 309    | 9.992        | 53.33      |
+| 309 | 309    | 15.945       | 75.33      |
+| 409 | 409    | 18.477       | 55.00      |
+| 409 | 409    | 27.220       | 76.00      |
+| 409 | 409    | 13.301       | 55.25      |
+| 409 | 409    | 20.599       | 74.75      |
+| 209 | 209    | 5.167        | 74.50      |
+| 209 | 209    | 3.252        | 51.00      |
 
 #### Instancje z błędami negatywnymi wynikającymi z powtórzeń
 
 | n   | length | time (ms)    | jakość (%) |
 |-----|--------|--------------|------------|
-| 509 | 509    | 38.198       | 100.00     |
-| 509 | 509    | 30.126       | 100.00     |
-| 509 | 485    | 31.031       | 95.29      |
-| 509 | 407    | 25.178       | 79.96      |
-| 509 | 312    | 27.094       | 61.30      |
+| 509 | 509    | 49.943       | 97.40      |
+| 509 | 509    | 21.899       | 97.20      |
+| 509 | 509    | 16.653       | 95.80      |
+| 509 | 509    | 23.277       | 92.00      |
+| 509 | 509    | 26.697       | 95.60      |
 
 #### Pozytywne losowe
 
 | n   | length | time (ms)    | jakość (%) |
 |-----|--------|--------------|------------|
-| 509 | 509    | 58.630       | 100.00     |
-| 209 | 209    | 9.067        | 100.00     |
-| 309 | 309    | 22.062       | 100.00     |
-| 509 | 509    | 61.392       | 100.00     |
-| 209 | 209    | 10.844       | 100.00     |
-| 509 | 509    | 55.132       | 100.00     |
-| 309 | 309    | 20.622       | 100.00     |
-| 409 | 409    | 34.109       | 100.00     |
-| 309 | 309    | 18.952       | 100.00     |
-| 409 | 409    | 33.086       | 100.00     |
-| 409 | 409    | 31.776       | 100.00     |
-| 209 | 209    | 10.803       | 100.00     |
+| 509 | 509    | 43.775       | 100.00     |
+| 209 | 209    | 8.415        | 88.00      |
+| 309 | 309    | 16.038       | 100.00     |
+| 509 | 509    | 39.278       | 100.00     |
+| 209 | 209    | 6.019        | 100.00     |
+| 509 | 509    | 35.956       | 100.00     |
+| 309 | 309    | 16.945       | 72.33      |
+| 409 | 409    | 35.034       | 79.50      |
+| 309 | 309    | 18.729       | 66.67      |
+| 409 | 409    | 33.948       | 88.00      |
+| 409 | 409    | 25.927       | 100.00     |
+| 209 | 209    | 5.632        | 100.00     |
 
 #### Pozytywne przekłamania na końcach oligonukleotydów
 
 | n   | length | time (ms)    | jakość (%) |
 |-----|--------|--------------|------------|
-| 509 | 509    | 29.213       | 100.00     |
-| 209 | 209    | 5.404        | 100.00     |
-| 309 | 309    | 8.172        | 100.00     |
-| 509 | 509    | 25.024       | 100.00     |
-| 209 | 209    | 3.868        | 100.00     |
-| 509 | 509    | 25.926       | 100.00     |
-| 309 | 259    | 8.720        | 83.82      |
-| 409 | 409    | 13.795       | 100.00     |
-| 309 | 309    | 9.995        | 100.00     |
-| 409 | 409    | 18.365       | 100.00     |
-| 409 | 409    | 15.054       | 100.00     |
-| 209 | 209    | 3.642        | 100.00     |
+| 509 | 509    | 19.833       | 100.00     |
+| 209 | 209    | 3.478        | 88.50      |
+| 309 | 309    | 8.038        | 100.00     |
+| 509 | 509    | 22.948       | 100.00     |
+| 209 | 209    | 4.963        | 96.50      |
+| 509 | 509    | 23.565       | 100.00     |
+| 309 | 309    | 11.738       | 72.33      |
+| 409 | 409    | 17.073       | 83.00      |
+| 309 | 309    | 7.703        | 94.00      |
+| 409 | 409    | 13.819       | 88.75      |
+| 409 | 409    | 15.890       | 100.00     |
+| 209 | 209    | 4.776        | 100.00     |
 
 ### Analiza
 
 1. **Instancje z błędami negatywnymi losowymi:**
-   - Jakość rozwiązania waha się od 57.61% do 100.00%.
-   - Czas obliczeń wynosi od 3.653 ms do 71.356 ms.
+   - Jakość rozwiązania waha się od 49.50% do 76.00%.
+   - Czas obliczeń wynosi od 3.252 ms do 78.001 ms.
    - Widać, że algorytm radzi sobie lepiej dla mniejszych wartości n, jednak dla większych n jakość rozwiązania bywa znacznie niższa.
 
 2. **Instancje z błędami negatywnymi wynikającymi z powtórzeń:**
-   - Jakość rozwiązania waha się od 61.30% do 100.00%.
-   - Czas obliczeń wynosi od 25.178 ms do 38.198 ms.
+   - Jakość rozwiązania waha się od 92.00% do 97.40%.
+   - Czas obliczeń wynosi od 16.653 ms do 49.943 ms.
    - Powtórzenia wpływają na jakość, jednak algorytm jest w stanie uzyskać wysokie wyniki jakości w niektórych przypadkach.
 
 3. **Pozytywne losowe:**
-   - Jakość rozwiązania wynosi 100.00% we wszystkich przypadkach.
-   - Czas obliczeń wynosi od 9.067 ms do 61.392 ms.
-   - Algorytm dobrze poradził sobie z pozytywnymi losowymi błędami, zawsze uzyskując najwyższą jakość.
+   - Jakość rozwiązania wynosi od 66.67% do 100.00%.
+   - Czas obliczeń wynosi od 5.632 ms do 43.775 ms.
+   - Algorytm dobrze poradził sobie z pozytywnymi losowymi błędami, często uzyskując najwyższą jakość.
 
-4. **Pozytywne przekłamania na końcach oligo:**
-   - Jakość rozwiązania wynosi głównie 100.00%, z wyjątkiem jednego przypadku (83.82%).
-   - Czas obliczeń wynosi od 3.642 ms do 29.213 ms.
-   - Przekłamania na końcach oligo mają niewielki wpływ na jakość, algorytm nadal osiąga wysoką dokładność.
+4. **
 
-#### Wnioski
-
-1. **Plusy:**
-   - Dobrze radzi sobie z pozytywnymi błędami, osiągając najwyższą jakość w wielu przypadkach.
-   - Jakość rozwiązania jest wysoka dla większości testowanych instancji.
-
-2. **Minusy:**
-   - Algorytm ma problemy z instancjami zawierającymi negatywne błędy losowe, gdzie jakość rozwiązania jest niższa.
-   - Powtórzenia w danych negatywnie wpływają na jakość w niektórych przypadkach.
+Pozytywne przekłamania na końcach oligonukleotydów:**
+   - Jakość rozwiązania waha się od 72.33% do 100.00%.
+   - Czas obliczeń wynosi od 3.478 ms do 23.565 ms.
+   - Algorytm radzi sobie bardzo dobrze z tym rodzajem błędów, często uzyskując maksymalną jakość rozwiązania.
