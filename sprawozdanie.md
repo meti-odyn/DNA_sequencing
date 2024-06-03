@@ -9,7 +9,7 @@ Jakub Wolniak 151797
 Celem niniejszego sprawozdania jest przedstawienie wyników testów algorytmu heurystycznego, który został zaprojektowany do sekwencjonowania łańcuchów DNA z błędami negatywnymi i pozytywnymi. Algorytm został przetestowany na różnych instancjach problemu, a wyniki obejmują czas obliczeń oraz jakość wygenerowanego rozwiązania dla każdej instancji. Dodatkowo, dokonano porównania działania heurystyki na zbiorach testowych różniących się rodzajem zawartych błędów.
 
 ## Algorytm
-Algorytm napisany w języku Kotlin ma na celu rozwiązanie problemu sekwencjonowania łańcuchów DNA z błędami negatywnymi i pozytywnymi. Algorytm wykorzystuje heurystyczne podejście do rekonstrukcji oryginalnej sekwencji DNA na podstawie podanych podsekwencji. Główne elementy algorytmu obejmują tworzenie listy podsekwencji, heurystyczne poszukiwanie sekwencji oraz przetwarzanie plików zawierających instancje problemu.
+Algorytm napisany w języku Kotlin ma na celu rozwiązanie problemu sekwencjonowania łańcuchów DNA z błędami negatywnymi i pozytywnymi. Algorytm wykorzystuje heurystyczne podejście do rekonstrukcji oryginalnej sekwencji DNA na podstawie podanych podsekwencji. Główne elementy algorytmu obejmują tworzenie listy podsekwencji i heurystyczne poszukiwanie sekwencji.
 
 Zmiany w oryginalnym algorytmie:
  - gdy jest już sekwencja o długości większej lub równej n to przestajemy dalej łączyć sekwencje i za ostateczny wynik przyjmujemy pierwsze n aminokwasów tej sekwencji 
@@ -113,9 +113,7 @@ Zbiory testowe różniły się liczbą podzbiorów. Testy przeprowadzono na inst
    - Czas obliczeń wynosi od 5.632 ms do 43.775 ms.
    - Algorytm dobrze poradził sobie z pozytywnymi losowymi błędami, często uzyskując najwyższą jakość.
 
-4. **
-
-Pozytywne przekłamania na końcach oligonukleotydów:**
+4. **Pozytywne przekłamania na końcach oligonukleotydów:**
    - Jakość rozwiązania waha się od 72.33% do 100.00%.
    - Czas obliczeń wynosi od 3.478 ms do 23.565 ms.
    - Algorytm radzi sobie bardzo dobrze z tym rodzajem błędów, często uzyskując maksymalną jakość rozwiązania.
